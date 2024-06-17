@@ -16,6 +16,7 @@ public class FilmController : ControllerBase
         movie.Id = id++;
         movies.Add(movie);
         return CreatedAtAction(nameof(GetMovieById), new { id = movie.Id }, movie);
+        // seguindo o padrão rest, quando criamos algo, retornamos o método que mostra a entidade que foi criada, e a própria entidade
     }
 
     [HttpGet]
