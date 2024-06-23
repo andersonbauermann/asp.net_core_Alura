@@ -23,11 +23,11 @@ public class FilmController : ControllerBase
     /// <summary>
     /// Add a movie to the database
     /// </summary>
-    /// <param name="filmeDto">DTO with the properties to create a movie</param>
+    /// <param name="movieDto">DTO with the properties to create a movie</param>
     /// <returns>IActionResult</returns>
     /// <response code="201">If insertion is successful</response>
     [HttpPost]
-    public IActionResult AddFilm([FromBody] CreateMovieDto movieDto)
+    public IActionResult AddFilm([FromBody] CreateMovieTheaterDto movieDto)
     {
         Movie movie = _mapper.Map<Movie>(movieDto);
         _context.Movies.Add(movie);

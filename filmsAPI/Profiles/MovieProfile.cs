@@ -8,7 +8,7 @@ public class MovieProfile : Profile
 {
     public MovieProfile()
     {
-        CreateMap<CreateMovieDto, Movie>();
+        CreateMap<CreateMovieTheaterDto, Movie>();
         CreateMap<UpdateMovieDto, Movie>();
         CreateMap<Movie, UpdateMovieDto>();
         CreateMap<Movie, ReadMovieDto>();
