@@ -6,4 +6,5 @@ public class CreateMovieTheaterDto
 {
     [Required(ErrorMessage = "The Name of the Movie Theather is mandatory")]
     public string Name { get; set; }
+    public int AddreddId { get; set; }
 }

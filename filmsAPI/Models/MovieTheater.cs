@@ -9,4 +9,6 @@ public class MovieTheater
     public int Id { get; set; }
     [Required(ErrorMessage = "The Name of the Movie Theather is mandatory")]
     public string Name { get; set; }
+    public int AddressId { get; set; }
+    public virtual Address Address { get; set; }
 }

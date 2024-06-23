@@ -33,7 +33,6 @@ public class MovieTheaterController : ControllerBase
         _context.MovieTheaters.Add(movieTheather);
         _context.SaveChanges();
         return CreatedAtAction(nameof(GetMovieTheaterById), new { id = movieTheather.Id }, movieTheather);
-        // seguindo o padrão rest, quando criamos algo, retornamos o método que mostra a entidade que foi criada, e a própria entidade
     }
 
     /// <summary>
@@ -65,7 +64,7 @@ public class MovieTheaterController : ControllerBase
         if (movieTheater is null) return NotFound();
 
         var movieTheatherDto = _mapper.Map<ReadMovieTheaterDto>(movieTheater);
-        return Ok(movieTheater);
+        return Ok(movieTheatherDto);
     }
 
     /// <summary>
@@ -133,5 +132,4 @@ public class MovieTheaterController : ControllerBase
         _context.SaveChanges();
         return NoContent();
     }
-
 }
