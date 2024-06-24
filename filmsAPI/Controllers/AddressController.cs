@@ -21,9 +21,9 @@ public class AddressController : ControllerBase
     }
 
     /// <summary>
-    /// Add a movie theater to the database
+    /// Add a address to the database
     /// </summary>
-    /// <param name="addressDto">DTO with the properties to create a movie theater</param>
+    /// <param name="addressDto">DTO with the properties to create a address</param>
     /// <returns>IActionResult</returns>
     /// <response code="201">If insertion is successful</response>
     [HttpPost]

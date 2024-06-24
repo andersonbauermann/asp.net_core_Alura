@@ -23,16 +23,16 @@ public class MovieTheaterController : ControllerBase
     /// <summary>
     /// Add a movie theater to the database
     /// </summary>
-    /// <param name="movieTheatherDto">DTO with the properties to create a movie theater</param>
+    /// <param name="movieTheaterDto">DTO with the properties to create a movie theater</param>
     /// <returns>IActionResult</returns>
     /// <response code="201">If insertion is successful</response>
     [HttpPost]
-    public IActionResult AddMovieTheather([FromBody] CreateMovieTheaterDto movieTheatherDto)
+    public IActionResult AddMovieTheather([FromBody] CreateMovieTheaterDto movieTheaterDto)
     {
-        MovieTheater movieTheather = _mapper.Map<MovieTheater>(movieTheatherDto);
-        _context.MovieTheaters.Add(movieTheather);
+        MovieTheater movieTheater = _mapper.Map<MovieTheater>(movieTheaterDto);
+        _context.MovieTheaters.Add(movieTheater);
         _context.SaveChanges();
-        return CreatedAtAction(nameof(GetMovieTheaterById), new { id = movieTheather.Id }, movieTheather);
+        return CreatedAtAction(nameof(GetMovieTheaterById), new { id = movieTheater.Id }, movieTheater);
     }
 
     /// <summary>
@@ -45,8 +45,7 @@ public class MovieTheaterController : ControllerBase
     [HttpGet]
     public IEnumerable<ReadMovieTheaterDto> GetMovieTheaterList([FromQuery] int skip = 0, [FromQuery] int take = 10)
     {
-
-        return _mapper.Map<List<ReadMovieTheaterDto>>(_context.MovieTheaters.Skip(skip).Take(take));
+        return _mapper.Map<List<ReadMovieTheaterDto>>(_context.MovieTheaters.Skip(skip).Take(take).ToList());
     }
 
     /// <summary>
