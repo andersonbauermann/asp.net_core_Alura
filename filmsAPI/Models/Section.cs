@@ -4,10 +4,8 @@ namespace filmsAPI.Models;
 
 public class Section
 {
-    [Key]
-    [Required]
-    public int Id { get; set; }
-    [Required]
-    public int MovieId { get; set; }
+    public int? MovieId { get; set; }
     public virtual Movie Movie { get; set; }
+    public int? MovieTheaterId { get; set; }
+    public virtual MovieTheater MovieTheater { get; set; }
 }

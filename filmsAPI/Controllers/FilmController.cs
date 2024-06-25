@@ -46,8 +46,7 @@ public class FilmController : ControllerBase
     [HttpGet]
     public IEnumerable<ReadMovieDto> GetMovies([FromQuery] int skip = 0, [FromQuery] int take = 10)
     {
-
-        return _mapper.Map<List<ReadMovieDto>>(_context.Movies.Skip(skip).Take(take));
+        return _mapper.Map<List<ReadMovieDto>>(_context.Movies.Skip(skip).Take(take).ToList());
     }
 
     /// <summary>

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using filmsAPI.Data;
 
@@ -10,9 +11,10 @@ using filmsAPI.Data;
 namespace filmsAPI.Migrations
 {
     [DbContext(typeof(MovieContext))]
-    partial class MovieContextModelSnapshot : ModelSnapshot
+    [Migration("20240625101614_Relationship Section and MovieTheater")]
+    partial class RelationshipSectionandMovieTheater
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -83,13 +85,19 @@ namespace filmsAPI.Migrations
 
             modelBuilder.Entity("filmsAPI.Models.Section", b =>
                 {
-                    b.Property<int?>("MovieId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("MovieId")
                         .HasColumnType("int");
 
                     b.Property<int?>("MovieTheaterId")
                         .HasColumnType("int");
 
-                    b.HasKey("MovieId", "MovieTheaterId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("MovieId");
 
                     b.HasIndex("MovieTheaterId");
 
@@ -117,9 +125,7 @@ namespace filmsAPI.Migrations
 
                     b.HasOne("filmsAPI.Models.MovieTheater", "MovieTheater")
                         .WithMany("Sections")
-                        .HasForeignKey("MovieTheaterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("MovieTheaterId");
 
                     b.Navigation("Movie");
 

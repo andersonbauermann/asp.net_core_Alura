@@ -32,7 +32,9 @@ public class SectionController : ControllerBase
         Section section = _mapper.Map<Section>(sectionDto);
         _context.Sections.Add(section);
         _context.SaveChanges();
-        return CreatedAtAction(nameof(GetSectionById), new { section.Id }, section);
+        return CreatedAtAction(nameof(GetSectionById),
+                               new { movieId = section.MovieId, movieTheaterId = section.MovieTheaterId },
+                               section);
     }
 
     [HttpGet]
@@ -41,10 +43,10 @@ public class SectionController : ControllerBase
         return _mapper.Map<List<ReadSectionDto>>(_context.Sections.ToList());
     }
 
-    [HttpGet("{id}")]
-    public IActionResult GetSectionById(int id)
+    [HttpGet("{movieId}/{movieTheaterId}")]
+    public IActionResult GetSectionById(int movieId, int movieTheaterId)
     {
-        Section section = _context.Sections.FirstOrDefault(section => section.Id == id);
+        Section section = _context.Sections.FirstOrDefault(section => section.MovieId == movieId && section.MovieTheaterId == movieTheaterId);
         if (section != null)
         {
             ReadSectionDto sectionDto = _mapper.Map<ReadSectionDto>(section);
