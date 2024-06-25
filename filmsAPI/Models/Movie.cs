@@ -15,4 +15,5 @@ public class Movie
     [Required]
     [Range(70, 600, ErrorMessage = "The length of the film must be between 70 and 600 minutes")]
     public int Duration { get; set; }
+    public virtual ICollection<Section> Sections { get; set; }
 }

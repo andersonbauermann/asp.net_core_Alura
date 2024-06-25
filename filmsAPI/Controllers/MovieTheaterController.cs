@@ -62,8 +62,8 @@ public class MovieTheaterController : ControllerBase
 
         if (movieTheater is null) return NotFound();
 
-        var movieTheatherDto = _mapper.Map<ReadMovieTheaterDto>(movieTheater);
-        return Ok(movieTheatherDto);
+        var movieTheaterDto = _mapper.Map<ReadMovieTheaterDto>(movieTheater);
+        return Ok(movieTheaterDto);
     }
 
     /// <summary>
