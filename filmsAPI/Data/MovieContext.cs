@@ -1,13 +1,12 @@
 ﻿using filmsAPI.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace filmsAPI.Data;
 
-public class MovieContext : DbContext
+public class MovieContext : IdentityDbContext<User> // sem identity herda somente de DbContext
 {
-    public MovieContext(DbContextOptions<MovieContext> opts) : base(opts)
-    {
-    }
+    public MovieContext(DbContextOptions<MovieContext> opts) : base(opts) { }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

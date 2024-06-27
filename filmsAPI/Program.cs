@@ -1,4 +1,6 @@
 using filmsAPI.Data;
+using filmsAPI.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
@@ -6,10 +8,11 @@ using System.Reflection;
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("MovieConntection");
+
 builder.Services.AddDbContext<MovieContext>(opts => opts.UseLazyLoadingProxies()
                                                         .UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<MovieContext>().AddDefaultTokenProviders();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
 builder.Services.AddControllers().AddNewtonsoftJson();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
