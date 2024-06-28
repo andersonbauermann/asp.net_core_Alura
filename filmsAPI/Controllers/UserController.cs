@@ -1,4 +1,7 @@
-﻿using filmsAPI.Data.Dtos;
+﻿using AutoMapper;
+using filmsAPI.Data.Dtos;
+using filmsAPI.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace filmsAPI.Controllers;
@@ -7,9 +10,26 @@ namespace filmsAPI.Controllers;
 [Route("[controller]")]
 public class UserController : ControllerBase
 {
-    [HttpPost]
-    public IActionResult RegisterUser(CreateUserDto user)
+    private readonly IMapper _mapper;
+    private readonly UserManager<User> _userManager;
+
+    public UserController(IMapper mapper, UserManager<User> userManager)
     {
-        throw new NotImplementedException();
+        _mapper = mapper;
+        _userManager = userManager;
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> RegisterUser(CreateUserDto userDto)
+    {
+        User user = _mapper.Map<User>(userDto);
+        var result = await _userManager.CreateAsync(user, userDto.Password);
+
+        if (result.Succeeded)
+        {
+            return Ok();
+        }
+
+        throw new ApplicationException();
     }
 }

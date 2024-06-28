@@ -1,4 +1,5 @@
 ﻿using filmsAPI.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -28,6 +29,15 @@ public class MovieContext : IdentityDbContext<User> // sem identity herda soment
             .HasOne(address => address.MovieTheater)
             .WithOne(movieTheater => movieTheater.Address)
             .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<IdentityUserLogin<string>>()
+            .HasKey(login => new { login.LoginProvider, login.ProviderKey });
+
+        modelBuilder.Entity<IdentityUserRole<string>>()
+            .HasKey(role => new { role.UserId, role.RoleId });
+
+        modelBuilder.Entity<IdentityUserToken<string>>()
+            .HasKey(token => new { token.UserId, token.LoginProvider, token.Name });
     }
 
     public DbSet<Movie> Movies { get; set; }

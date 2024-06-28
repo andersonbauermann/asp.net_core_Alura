@@ -64,7 +64,7 @@ public class MovieTheaterController : ControllerBase
     /// <returns>IActionResult</returns>
     /// <response code="200">If the movie theater is found</response>
     /// <response code="404">If the movie theater is not found</response>
-    [HttpGet("{id}")]
+    [HttpGet("byId/{id}")]
     public IActionResult GetMovieTheaterById(int id)
     {
         var movieTheater = _context.MovieTheaters.FirstOrDefault(x => x.Id == id);
