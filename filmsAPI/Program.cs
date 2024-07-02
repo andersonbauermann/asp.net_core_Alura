@@ -14,9 +14,13 @@ builder.Services.AddDbContext<MovieContext>(opts => opts.UseLazyLoadingProxies()
                                                         .UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<MovieContext>().AddDefaultTokenProviders();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<TokenService>();
+
 builder.Services.AddControllers().AddNewtonsoftJson();
 builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Movies¿PI", Version = "v1" });
