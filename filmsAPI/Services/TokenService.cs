@@ -2,12 +2,19 @@
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Security.Cryptography;
+using System.Text;
 
 namespace filmsAPI.Services;
 
 public class TokenService
 {
+    private readonly IConfiguration _config;
+    
+    public TokenService(IConfiguration configuration)
+    {
+        _config = configuration;
+    }
+
     public string GenerateToken(User user)
     {
         Claim[] claims = new Claim[]
@@ -17,12 +24,7 @@ public class TokenService
             new(ClaimTypes.DateOfBirth, user.BirthdayDate.ToString()),
         };
 
-        byte[] key = new byte[32];
-        using (var rng = RandomNumberGenerator.Create())
-        {
-            rng.GetBytes(key);
-        }
-
+        var key = Encoding.UTF8.GetBytes(_config["JwtSettings:Key"]);
         var symmetricKey = new SymmetricSecurityKey(key);
 
         var signingCredentials = new SigningCredentials(symmetricKey, SecurityAlgorithms.HmacSha256);
